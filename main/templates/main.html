@@ -1,0 +1,56 @@
+{% extends "base.html" %} {% block content%}
+<h1>買い物 Tracker</h1>
+
+<h5>Name:</h5>
+<p>{{ name }}</p>
+<!-- Ubahlah sesuai dengan nama kamu -->
+<h5>Class: </h5>
+<p>{{ class }}</p>
+<!-- Ubahlah sesuai dengan kelas kamu -->
+ {# h5>Sesi terakhir login: {{last_login}}/h5> #}
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Page</th>
+        <th>Description</th>
+        <th>Date Added</th>
+
+    </tr>
+    {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini
+    {%endcomment %} {% for barang in barangs %}
+    <tr>
+        <th>{{barang.name}}</th>
+        <th>{{barang.amount}}</th>
+        <th>{{barang.description}}</th>
+        <th>{{barang.date_added}}</th>
+        <th>{{barang.harga}}</th>
+        <td>
+            <!--<a href="{ url 'main:edit_book' book.pk %}"> -->
+            
+          
+                <button>
+                    Edit
+                </button>
+            </a>
+            <!-- <a href="{ url 'main:delete_book' book.pk %}">-->
+            
+                <button>
+                    Delete
+                </button>
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<br/>
+<!--<a href="{ url 'main:create_book'%}"> -->
+
+    <button>Add New Book</button>
+</a>
+
+<!-- <a href="{ url 'main:logout' %}">-->
+
+    <button>Logout</button>
+  </a>
+{%endblock content%}

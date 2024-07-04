@@ -15,6 +15,7 @@
         <th>Page</th>
         <th>Description</th>
         <th>Date Added</th>
+        <th>Harga</th>
 
     </tr>
     {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini
@@ -23,8 +24,8 @@
         <th>{{barang.name}}</th>
         <th>{{barang.amount}}</th>
         <th>{{barang.description}}</th>
-        <th>{{barang.date_added}}</th>
-        <th>{{barang.harga}}</th>
+        <th>{{barang.date_added}} </th>
+        <th>{{barang.harga}} Rupiah</th>
         <td>
             <!--<a href="{ url 'main:edit_book' book.pk %}"> -->
             
@@ -44,9 +45,9 @@
     {% endfor %}
 </table>
 <br/>
-<!--<a href="{ url 'main:create_book'%}"> -->
+<a href="{%url 'main:create_barang'%}">
 
-    <button>Add New Book</button>
+    <button>Add New Barang</button>
 </a>
 
 <!-- <a href="{ url 'main:logout' %}">-->

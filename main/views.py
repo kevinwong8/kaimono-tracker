@@ -7,29 +7,36 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+import datetime
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 # Create your views here.
 @login_required(login_url='/login')
 def show_main(request):
-    barangs = Barang.objects.all()
+    barangs = Barang.objects.filter(user=request.user)
     
     context = {
-        'name' : "Kevin",
+        'name' :  request.user.username,
         'class' : "PBP A",
         'barangs' : barangs,
-        #'last_login': request.COOKIES['last_login']
+        'last_login': request.COOKIES['last_login']
     }
     return render(request, "main.html", context)
+
 
 def create_barang(request):
     form = BarangForm(request.POST or None)
 
-    if form.is_valid() and request.method== "POST":
-        form.save()
+    if form.is_valid() and request.method == "POST":
+        barang = form.save(commit=False)
+        barang.user = request.user
+        barang.save()
         return redirect('main:show_main')
-    
-    context = {'form':form}
+
+    context = {'form': form}
     return render(request, "create_barang.html", context)
+ 
 
 def show_xml(request):
     data = Barang.objects.all()
@@ -56,6 +63,7 @@ def register(request):
             form.save()
             messages.success(request, 'Your account has been successfully created!')
             return redirect('main:login')
+        
     context = {'form':form}
     return render(request, 'register.html', context)
 
@@ -66,7 +74,10 @@ def login_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('main:show_main')
+            response = HttpResponseRedirect(reverse("main:show_main"))
+            response.set_cookie('last_login', str(datetime.datetime.now()))
+            return response
+        
         else:
             messages.info(request, 'Sorry, incorrect username or password. Please try again.')
     context = {}
@@ -74,5 +85,32 @@ def login_user(request):
 
 def logout_user(request):
     logout(request)
-    return redirect('main:login')
+    response = HttpResponseRedirect(reverse('main:login'))
+    response.delete_cookie('last_login')
+    return response
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

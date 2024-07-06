@@ -7,7 +7,7 @@
 <h5>Class: </h5>
 <p>{{ class }}</p>
 <!-- Ubahlah sesuai dengan kelas kamu -->
- {# h5>Sesi terakhir login: {{last_login}}/h5> #}
+<h5>Sesi terakhir login: {{last_login}}</h5>
 
 <table>
     <tr>
@@ -19,7 +19,8 @@
 
     </tr>
     {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini
-    {%endcomment %} {% for barang in barangs %}
+    {%endcomment %}
+    {% for barang in barangs %}
     <tr>
         <th>{{barang.name}}</th>
         <th>{{barang.amount}}</th>
@@ -50,7 +51,7 @@
     <button>Add New Barang</button>
 </a>
 
-<!-- <a href="{ url 'main:logout' %}">-->
+<a href="{% url 'main:logout' %}">
 
     <button>Logout</button>
   </a>

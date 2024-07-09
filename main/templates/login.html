@@ -1,59 +1,82 @@
 {% extends 'base.html' %}
+{%load static%}
 
-{% block meta %}
-<title>Login</title>
-{% endblock meta %} 
+{% block meta%} 
+  <title>Login</title>
+  <link rel="stylesheet"  href="{% static 'css/login.css' %}"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+{% endblock meta %}
 
 {% block content %}
-<div class="login">
-  <h1>Login</h1>
 
-  <form method="POST" action="">
-    {% csrf_token %}
-    <table>
-      <tr>
-        <td>Username:</td>
-        <td>
-          <input
-            type="text"
-            name="username"
-            placeholder="Username"
-            class="form-control"
-          />
-        </td>
-      </tr>
+<div class="login-container">
+  <div class = "login">
+    <h1 class >Log in</h1>
 
-      <tr>
-        <td>Password:</td>
-        <td>
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            class="form-control"
-          />
-        </td>
-      </tr>
+    <div class = "login-form">
+      <form method="POST" action="">
+        {% csrf_token %}
+        <table>
+          <tr>
+            <td>Username:</td>
+            <td>
+              <input
+                type="text"
+                name="username"
+                placeholder="Username"
+                class="form-control"
+              />
+            </td>
+          </tr>
 
-      <tr>
-        <td></td>
-        <td><input class="btn login_btn" type="submit" value="Login" /></td>
-      </tr>
-    </table>
-  </form>
+          <tr>
+            <td>Password:</td>
+            <td>
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                class="form-control"
+              />
+            </td>
+          </tr>
 
-  {% if messages %}
-  <ul>
-    {% for message in messages %}
-    <li>{{ message }}</li>
-    {% endfor %}
-  </ul>
-  {% endif %} Don't have an account yet?
-  <a href="{% url 'main:register' %}">Register Now</a>
-  
-<a href="{% url 'main:logout' %}">
-  <button>Logout</button>
-</a>
+          <tr>
+            <td></td>
+            <td><input class="btn login_btn" type="submit" value="Login" /></td>
+          </tr>
+        </table>
+      </form>
+    </div>
 
-
+    
+    
+    <div class="register">
+      <p>Don't have an account yet?</p>
+       <a href="{% url 'main:register' %}"><button class="registerbtn">Register Now</button></a>
+    </div> 
+    
+    <div id="invalidinput">
+        {% if messages %}
+        <ul>
+          {% for message in messages %}
+          <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    
+  </div>
+</div>
+</body>
+<script>
+  function myFunction() {
+    var x = document.getElementById("invalidinput");
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 8000);
+  }
+</script>
 {% endblock content %}
+

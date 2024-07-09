@@ -37,6 +37,8 @@ def create_barang(request):
     context = {'form': form}
     return render(request, "create_barang.html", context)
  
+def test(request):
+    return render(request,"test.html")
 
 def show_xml(request):
     data = Barang.objects.all()

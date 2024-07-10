@@ -1,33 +1,33 @@
-{% extends "base.html" %} {% block content%}
+{% extends "base.html" %} 
+{% load static %}
+{% block meta %}
+<title>Main</title>
+<link rel="stylesheet"  href="{% static 'css/main.css' %}"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+{% endblock meta %} 
+{% block content%}
 <h1>買い物 Tracker</h1>
 
-<h5>Name:</h5>
-<p>{{ name }}</p>
-<!-- Ubahlah sesuai dengan nama kamu -->
-<h5>Class: </h5>
-<p>{{ class }}</p>
-<!-- Ubahlah sesuai dengan kelas kamu -->
+<h5>Name: {{ name }}</h5>
+<h5>Class:{{ class }} </h5>
 <h5>Sesi terakhir login: {{last_login}}</h5>
 
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Page</th>
-        <th>Description</th>
-        <th>Date Added</th>
-        <th>Harga</th>
 
-    </tr>
     {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini
     {%endcomment %}
-    {% for barang in barangs %}
-    <tr>
-        <th>{{barang.name}}</th>
-        <th>{{barang.amount}}</th>
-        <th>{{barang.description}}</th>
-        <th>{{barang.date_added}} </th>
-        <th>{{barang.harga}} Rupiah</th>
-        <td>
+    <div class="card">
+        {% for barang in barangs %}
+        
+        <div class="container">
+            <h4>Nama : {{barang.name}}</h4>
+            <h4>Jumlah :{{barang.amount}}</h4>
+            <h4>Deskripsi :{{barang.description}}</h4>
+            <h4>Tanggal {{barang.date_added}} </h4>
+            <h4>Harga : {{barang.harga}} Rupiah</h4>
+            
+        </div>
             <!--<a href="{ url 'main:edit_book' book.pk %}"> -->
             
           
@@ -41,10 +41,12 @@
                     Delete
                 </button>
             </a>
-        </td>
-    </tr>
+        
+    
     {% endfor %}
-</table>
+    </div>
+    
+
 <br/>
 <a href="{%url 'main:create_barang'%}">
 

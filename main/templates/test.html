@@ -1,15 +1,119 @@
+{% extends "base.html" %} {% block content%}
+<h1>買い物 Tracker</h1>
 
-{% load static %}
-<html lang="en">
-<head>
+<h5>Name:</h5>
+<p>{{ name }}</p>
+<!-- Ubahlah sesuai dengan nama kamu -->
+<h5>Class: </h5>
+<p>{{ class }}</p>
+<!-- Ubahlah sesuai dengan kelas kamu -->
+<h5>Sesi terakhir login: {{last_login}}</h5>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet"  href="{% static 'css/login.css' %}"/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-<body>
-    <h1>Welcome to the test</h1>
-    <p>test bro</p>
-</body>
-</html>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Page</th>
+        <th>Description</th>
+        <th>Date Added</th>
+        <th>Harga</th>
+
+    </tr>
+    {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini
+    {%endcomment %}
+    {% for barang in barangs %}
+    <tr>
+        <th>{{barang.name}}</th>
+        <th>{{barang.amount}}</th>
+        <th>{{barang.description}}</th>
+        <th>{{barang.date_added}} </th>
+        <th>{{barang.harga}} Rupiah</th>
+        <td>
+            <!--<a href="{ url 'main:edit_book' book.pk %}"> -->
+            
+          
+                <button>
+                    Edit
+                </button>
+            </a>
+            <!-- <a href="{ url 'main:delete_book' book.pk %}">-->
+            
+                <button>
+                    Delete
+                </button>
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<br/>
+<a href="{%url 'main:create_barang'%}">
+
+    <button>Add New Barang</button>
+</a>
+
+<a href="{% url 'main:logout' %}">
+
+    <button>Logout</button>
+  </a>
+{%endblock content%}{% load static %}
+{% block content%}
+<h1>買い物 Tracker</h1>
+
+<h5>Name:</h5>
+<p>{{ name }}</p>
+<!-- Ubahlah sesuai dengan nama kamu -->
+<h5>Class: </h5>
+<p>{{ class }}</p>
+<!-- Ubahlah sesuai dengan kelas kamu -->
+<h5>Sesi terakhir login: {{last_login}}</h5>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Page</th>
+        <th>Description</th>
+        <th>Date Added</th>
+        <th>Harga</th>
+
+    </tr>
+    
+
+    <div class="card">
+        {% for barang in barangs %}
+    <tr>
+        <th>{{barang.name}}</th>
+        <th>{{barang.amount}}</th>
+        <th>{{barang.description}}</th>
+        <th>{{barang.date_added}} </th>
+        <th>{{barang.harga}} Rupiah</th>
+        <td>
+    </div>
+    
+            <!--<a href="{ url 'main:edit_book' book.pk %}"> -->
+            
+          
+                <button>
+                    Edit
+                </button>
+            </a>
+            <!-- <a href="{ url 'main:delete_book' book.pk %}">-->
+            
+                <button>
+                    Delete
+                </button>
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<br/>
+<a href="{%url 'main:create_barang'%}">
+
+    <button>Add New Barang</button>
+</a>
+
+<a href="{% url 'main:logout' %}">
+
+    <button>Logout</button>
+  </a>
+{%endblock content%}
